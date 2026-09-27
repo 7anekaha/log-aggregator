@@ -3,10 +3,10 @@ from abc import ABC, abstractmethod
 from definitions.log import Log
 
 class Service(ABC):
-    def __init__(self, name, queue: asyncio.PriorityQueue[Log], color: str):
+    def __init__(self, name, color: str, queue: asyncio.PriorityQueue[Log]):
         self.name = name
-        self.queue = queue
         self.color = color
+        self.queue = queue
         self._task = None  # Holds the asyncio task for the service's log generation
 
     def start(self) -> asyncio.Task:
