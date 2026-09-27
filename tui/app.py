@@ -39,12 +39,10 @@ class LogApp(App):
         yield RichLog(highlight=True, markup=True)
 
     async def action_quit(self) -> None:
-        if not self.start_event.is_set():
-            self.start_event.set()  # Ensure logging is resumed before quitting
+        self.start_event.set()  # Ensure logging is resumed before quitting
         priority_queue = self.services[0].queue
         priority_queue.put_nowait(Log(service="Sentinel", ts=datetime.now(), message="Sentinel", color="dim"))
-        await priority_queue.join()  # Wait until the sentinel is processed
-        await asyncio.sleep(0.2)  # Give some time for the consumer to process the sentinel
+        await self.consumer.wait_until_done()
         await asyncio.gather(*[service.stop() for service in self.services], return_exceptions=True)
         self.exit()
 
