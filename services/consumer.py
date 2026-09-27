@@ -9,13 +9,13 @@ from definitions.log import Log
 
 
 class Consumer:
-    def __init__(self, priority_queue: asyncio.PriorityQueue[Log], log_widget: RichLog, filters: list[Filter], start_event: asyncio.Event):
+    def __init__(self, priority_queue: asyncio.PriorityQueue[Log], log_widget: RichLog, filters: list[Filter], start_event: asyncio.Event, window_size: int = 5):
         self.priority_queue = priority_queue
         self.console = log_widget
         self.filters = filters
         self.start_event = start_event
         self._task = None
-        self.window_size = 5
+        self.window_size = window_size # Window size in seconds for log display cutoff
 
     def start(self) -> asyncio.Task:
         self._task = asyncio.create_task(self._run())
