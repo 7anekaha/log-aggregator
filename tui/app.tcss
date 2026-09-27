@@ -1,0 +1,50 @@
+/* app.tcss */
+Screen {
+    layout: vertical;
+}
+
+#controls-container {
+    height: auto;
+    dock: top;
+}
+
+#filter-bar {
+    height: 3;
+    align-vertical: middle;
+    padding: 0 1;
+    background: $surface;
+}
+
+#chips-container {
+    height: 1;
+    width: 1fr;
+}
+
+RichLog {
+    height: 1fr;
+    width: 100%;
+}
+
+FilterChip {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-right: 2;
+    min-width: 0;
+    height: 1;
+    color: $text-muted;
+}
+
+/* Hover state */
+FilterChip:hover {
+    background: transparent;
+    color: $error;
+    text-style: bold;
+}
+
+/* Focus state for keyboard navigation */
+FilterChip:focus {
+    background: $accent;
+    color: $text;
+    text-style: bold;
+}
