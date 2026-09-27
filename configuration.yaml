@@ -1,0 +1,8 @@
+services:
+  - name: Service1
+    color: red
+    type: random
+
+  - name: Service2
+    color: blue
+    type: random
